@@ -1,1 +1,0 @@
-"Eliminar README.md inicial"
