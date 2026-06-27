@@ -1,0 +1,93 @@
+
+.productos-container {
+  padding: 2rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.productos-container h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+/* Grilla responsiva */
+.productos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Tarjeta de producto */
+.producto-card {
+  background-color: inherit;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.producto-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.producto-card h3 {
+  margin: 0.5rem 0;
+}
+
+.producto-card p {
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Botón */
+.producto-card button {
+  background-color: transparent;
+  border: 2px solid;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Modo claro */
+.light-mode .productos-container {
+  background-color: #f9f9f9;
+  color: #2c3e50;
+}
+
+.light-mode .producto-card {
+  border-color: #ddd;
+}
+
+.light-mode .producto-card button {
+  border-color: #0d6efd;
+  color: #0d6efd;
+}
+
+.light-mode .producto-card button:hover {
+  background-color: #0d6efd;
+  color: #fff;
+}
+
+/* Modo oscuro */
+.dark-mode .productos-container {
+  background-color: #1c1c1c;
+  color: #ecf0f1;
+}
+
+.dark-mode .producto-card {
+  border-color: #444;
+}
+
+.dark-mode .producto-card button {
+  border-color: #1abc9c;
+  color: #1abc9c;
+}
+
+.dark-mode .producto-card button:hover {
+  background-color: #1abc9c;
+  color: #fff;
+}
