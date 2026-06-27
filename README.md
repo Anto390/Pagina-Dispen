@@ -1,1 +1,1 @@
-# Pagina-Dispen
+"Eliminar README.md inicial"
