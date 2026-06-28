@@ -1,13 +1,20 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App";
-import { CarritoProvider } from "./context/CartContext"; 
-import "./index.css";
+import { RouterProvider } from "react-router-dom";
+import router from "./router";
+import { CarritoProvider } from "./context/CartContext";
+import "./styles.css";
 
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <CarritoProvider>
-      <App />
-    </CarritoProvider>
-  </React.StrictMode>
-);
+const rootElement = document.getElementById("root");
+
+if (rootElement) {
+  ReactDOM.createRoot(rootElement).render(
+    <React.StrictMode>
+      <CarritoProvider>
+        <RouterProvider router={router} />
+      </CarritoProvider>
+    </React.StrictMode>
+  );
+} else {
+  console.error("No se encontró el elemento root en el DOM.");
+}

@@ -1,42 +1,80 @@
-import React, { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
-import { useCarritoContext } from "../context/CartContext";
+import React, { useState } from "react";
 import "./Navbar.css";
+import { Link } from "react-router-dom";
 
-export default function Navbar() {
-  const [darkMode, setDarkMode] = useState(false);
-  const { getItemQuantity } = useCarritoContext(); 
+const Navbar: React.FC = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [productosOpen, setProductosOpen] = useState(false);
 
-  useEffect(() => {
-    document.body.classList.toggle("dark-mode", darkMode);
-    document.body.classList.toggle("light-mode", !darkMode);
-  }, [darkMode]);
+  const toggleProductos = () => {
+    setProductosOpen(!productosOpen);
+  };
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-custom">
-      <div className="container-fluid">
-        <NavLink className="navbar-brand" to="/">DispenHogar</NavLink>
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <li><NavLink className="nav-link" to="/">Inicio</NavLink></li>
-            <li><NavLink className="nav-link" to="/productos">Productos</NavLink></li>
-            <li><NavLink className="nav-link" to="/quienessomos">Quiénes Somos</NavLink></li>
-            <li><NavLink className="nav-link" to="/contacto">Contacto</NavLink></li>
-            <li>
-              <NavLink className="nav-link carrito-link" to="/carrito">
-                Carrito 🛒
-                {getItemQuantity() > 0 && (
-                  <span className="cart-count">{getItemQuantity()}</span>
-                )}
-              </NavLink>
-            </li>
-            <li><NavLink className="nav-link" to="/perfil">Perfil</NavLink></li>
+    <nav className="navbar">
+      {/* Logo */}
+      <div className="navbar-left">
+        <img src="src/assets/DispenLogo.png" alt="DispenHogar Logo" className="navbar-logo" />
+        <span className="navbar-title">DispenHogar</span>
+      </div>
+
+      {/* Links principales */}
+      <ul className="navbar-links">
+        <li><Link to="/">Inicio</Link></li>
+
+        {/* Productos con hover y click */}
+        <li 
+          className={`navbar-item ${productosOpen ? "open" : ""}`}
+          onMouseEnter={() => setProductosOpen(true)}
+          onMouseLeave={() => setProductosOpen(false)}
+          onClick={toggleProductos}
+        >
+          <span className="navbar-link">
+            Productos {productosOpen ? "▲" : "▾"}
+          </span>
+          <ul className="submenu">
+            <li><Link to="/productos/combos">Combos</Link></li>
+            <li><Link to="/productos/todos">Todos los productos</Link></li>
           </ul>
-          <button className="btn btn-secondary" onClick={() => setDarkMode(!darkMode)}>
-            {darkMode ? "☀️ Claro" : "🌙 Oscuro"}
-          </button>
+        </li>
+
+        <li><Link to="/quienesomos">Quiénes Somos</Link></li>
+        <li><Link to="/contacto">Contacto</Link></li>
+      </ul>
+
+      {/* Acciones: buscador → perfil → carrito */}
+      <div className="navbar-actions">
+        {/* Buscador */}
+        <div className="navbar-search">
+          <input type="text" placeholder="Buscar..." />
+          <button>🔍</button>
+        </div>
+
+        {/* Perfil */}
+        <div className="navbar-profile">
+          <span 
+            className="profile-button" 
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            👤
+          </span>
+          {menuOpen && (
+            <div className="profile-menu">
+              <Link to="/login">Acceder</Link>
+              <Link to="/perfil">Mi Perfil</Link>
+              <Link to="/logout">Cerrar Sesión</Link>
+            </div>
+          )}
+        </div>
+
+        {/* Carrito */}
+        <div className="navbar-cart">
+          <Link to="/carrito" className="cart-button">🛒</Link>
+          <span className="cart-badge">0</span>
         </div>
       </div>
     </nav>
   );
-}
+};
+
+export default Navbar;

@@ -10,11 +10,11 @@ export interface Product {
 export const products: Product[] = [
   {
     id: 1,
-    nombre: "Detergente Líquido",
-    marca: "CleanCo",
+    nombre: "Detergente Líquido Ala +Concentrado",
+    marca: "ALA",
     precio: 1200,
-    stock: 10,
-    img: "https://via.placeholder.com/250?text=Detergente"
+    stock: 15,
+    img: "DetergenteLiquido.png"
   },
   {
     id: 2,
@@ -22,7 +22,7 @@ export const products: Product[] = [
     marca: "EcoWash",
     precio: 1500,
     stock: 8,
-    img: "https://via.placeholder.com/250?text=Desinfectante"
+    img: "DesinfectanteMultiuso.png"
   },
   {
     id: 3,
@@ -30,7 +30,7 @@ export const products: Product[] = [
     marca: "Prolim",
     precio: 900,
     stock: 12,
-    img: "https://via.placeholder.com/250?text=Escoba"
+    img: "EscobaCerdaSuave.png"
   },
   {
     id: 4,
@@ -38,6 +38,6 @@ export const products: Product[] = [
     marca: "CleanMax",
     precio: 500,
     stock: 20,
-    img: "https://via.placeholder.com/250?text=Guantes"
+    img: "GuantesLimpieza.png"
   }
 ];

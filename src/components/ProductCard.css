@@ -1,0 +1,45 @@
+.card {
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  overflow: hidden;
+  width: 250px;
+  background: #fff;
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.card-img {
+  width: 100%;
+  height: 200px;
+  object-fit: contain; /* ✅ mantiene proporción */
+  background: #f9f9f9;
+}
+
+.card-body {
+  padding: 15px;
+  font-family: 'Inter', sans-serif;
+}
+
+.card-body h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+}
+
+.btn {
+  background: #0077b6;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn:hover {
+  background: #023e8a;
+}

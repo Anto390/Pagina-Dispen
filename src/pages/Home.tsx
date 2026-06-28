@@ -1,48 +1,60 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { products, Product } from "../data/products";
 import "./Home.css";
 
-const cleaningProducts = [
-  {
-    id: 1,
-    name: "Detergente Líquido",
-    price: 5,
-    description: "Ideal para vajilla y superficies, elimina grasa fácilmente."
-  },
-  {
-    id: 2,
-    name: "Desinfectante Multiuso",
-    price: 7,
-    description: "Elimina el 99.9% de bacterias, perfecto para baños y cocinas."
-  },
-  {
-    id: 3,
-    name: "Escoba Suave",
-    price: 10,
-    description: "Escoba resistente para interiores, con cerdas suaves."
-  },
-  {
-    id: 4,
-    name: "Guantes de Limpieza",
-    price: 3,
-    description: "Protección para tus manos, cómodos y duraderos."
-  }
-];
-
 export default function Home() {
+  const [visited, setVisited] = useState<Product[]>([]);
+
+
+  useEffect(() => {
+    const visitedData = localStorage.getItem("visitedProducts");
+    if (visitedData) {
+      setVisited(JSON.parse(visitedData));
+    }
+  }, []);
+
+
+  const destacados = products.slice(0, 3);
+
+
+  const promociones = products.filter((p) => p.precio < 1000);
+
   return (
-    <div className="home">
+    <div className="home-page">
       <h2>Productos Destacados 🧼</h2>
-      <div className="productos">
-        {cleaningProducts.map((p) => (
+      <div className="productos-grid">
+        {destacados.map((p) => (
           <div key={p.id} className="producto-card">
-            <img
-              src={`https://via.placeholder.com/250?text=${p.name}`}
-              alt={p.name}
-            />
-            <h3>{p.name}</h3>
-            <p className="price">${p.price}</p>
-            <p>{p.description}</p>
-            <button className="btn-comprar">Agregar al Carrito 🛒</button>
+            <img src={p.img} alt={p.nombre} />
+            <h3>{p.nombre}</h3>
+            <p className="precio">${p.precio}</p>
+          </div>
+        ))}
+      </div>
+
+      <h2>Últimos Productos Visitados 👀</h2>
+      <div className="productos-grid">
+        {visited.length > 0 ? (
+          visited.map((p) => (
+            <div key={p.id} className="producto-card">
+              <img src={p.img} alt={p.nombre} />
+              <h3>{p.nombre}</h3>
+              <p className="precio">${p.precio}</p>
+            </div>
+          ))
+        ) : (
+          <p>No has visitado productos aún.</p>
+        )}
+      </div>
+
+      <h2>Promociones 🎉</h2>
+      <div className="productos-grid">
+        {promociones.map((p) => (
+          <div key={p.id} className="producto-card promo">
+            <img src={p.img} alt={p.nombre} />
+            <h3>{p.nombre}</h3>
+            <p className="precio">${p.precio}</p>
+            <span className="promo-badge">Oferta</span>
           </div>
         ))}
       </div>

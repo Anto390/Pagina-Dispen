@@ -22,7 +22,7 @@
   width: 220px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-
+/* Tarjeta de producto */
 .product-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);

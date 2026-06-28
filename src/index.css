@@ -4,3 +4,28 @@ body {
   background-color: #f9f9f9;
   color: #333;
 }
+/* Fuente base para todo el sitio */
+body {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  color: #333;
+}
+
+/* Títulos y encabezados */
+h1, h2, h3, .navbar-title, .navbar-links a {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  color: #fff; /* ejemplo para navbar azul */
+}
+
+/* Texto normal */
+p, li, span {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+}
+
+/* Botones y destacados */
+button, .cart-badge {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+}
