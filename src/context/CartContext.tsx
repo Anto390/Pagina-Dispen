@@ -2,12 +2,12 @@ import React, { createContext, useContext, useState } from "react";
 import { Product } from "../data/products";
 
 export interface CarritoItem extends Product {
-  quantity: number;
+  cantidad: number;
 }
 
 interface CarritoContextType {
   carrito: CarritoItem[];
-  addToCart: (product: Product, quantity: number) => void;
+  addToCart: (product: Product, cantidad: number) => void;
   removeItem: (id: number) => void;
   emptyCart: () => void;
   getTotalPrice: () => number;
@@ -20,17 +20,17 @@ export const CarritoProvider: React.FC<{ children: React.ReactNode }> = ({ child
   const [carrito, setCarrito] = useState<CarritoItem[]>([]);
 
   // Agregar producto
-  const addToCart = (product: Product, quantity: number) => {
+  const addToCart = (product: Product, cantidad: number) => {
     setCarrito(prev => {
       const existing = prev.find(item => item.id === product.id);
       if (existing) {
         return prev.map(item =>
           item.id === product.id
-            ? { ...item, quantity: item.quantity + quantity }
+            ? { ...item, cantidad: item.cantidad + cantidad }
             : item
         );
       }
-      return [...prev, { ...product, quantity }];
+      return [...prev, { ...product, cantidad }];
     });
   };
 
@@ -46,12 +46,12 @@ export const CarritoProvider: React.FC<{ children: React.ReactNode }> = ({ child
 
   // Total precio
   const getTotalPrice = () => {
-    return carrito.reduce((total, item) => total + item.precio * item.quantity, 0);
+    return carrito.reduce((total, item) => total + item.precio * item.cantidad, 0);
   };
 
   // total productos
   const getItemQuantity = () => {
-    return carrito.reduce((total, item) => total + item.quantity, 0);
+    return carrito.reduce((total, item) => total + item.cantidad, 0);
   };
 
   return (
