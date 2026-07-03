@@ -2,6 +2,8 @@
    Navbar principal más alto
    =========================== */
 .navbar {
+  position: static;
+  top: auto;
   background: #0077b6; /* azul principal */
   border-bottom: 2px solid #023e8a;
   padding: 30px 40px;
@@ -19,11 +21,100 @@
 .navbar-left {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 20px;
+}
+
+.navbar-logo-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.6rem;
 }
 
 .navbar-logo {
   width: 70px;
+}
+.logo-address-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 700;
+  padding: 6px 12px;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 999px;
+  box-shadow: none;
+  transition: transform 0.12s ease, opacity 0.12s ease, background 0.12s ease;
+}
+
+.logo-address-link:hover {
+  transform: none;
+  background: rgba(255,255,255,0.04);
+  opacity: 0.98;
+}
+
+/* Responsive: mobile & tablet */
+@media (max-width: 900px) {
+  .navbar {
+    padding: 14px 18px;
+    min-height: 70px;
+    align-items: flex-start;
+  }
+
+  .navbar-left {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .navbar-logo-group {
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .navbar-links {
+    display: none;
+  }
+
+  .navbar-actions {
+    width: 100%;
+    margin-top: 8px;
+    justify-content: space-between;
+  }
+
+  .navbar-search input {
+    width: 120px;
+  }
+
+  .logo-address-link {
+    padding: 6px 10px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    padding: 10px 12px;
+  }
+
+  .navbar-logo {
+    width: 56px;
+  }
+
+  .logo-address-link {
+    font-size: 0.85rem;
+    padding: 6px 8px;
+  }
+
+  .navbar-search input {
+    width: 100px;
+  }
 }
 
 .navbar-title {
@@ -50,15 +141,29 @@
   color: #fff;
   font-size: 1.1rem;
   font-weight: 500;
-  transition: color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+  transition: color 0.3s ease;
   padding: 6px 12px;
-  border-radius: 20px;
+  position: relative;
+}
+
+.navbar-links a::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 4px;
+  width: 0;
+  height: 2px;
+  background: #88ff43;
+  transition: width 0.3s ease, left 0.3s ease;
 }
 
 .navbar-links a:hover {
   color: #88ff43;
-  background: rgba(255,255,255,0.1);
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.navbar-links a:hover::after {
+  width: calc(100% - 12px);
+  left: 6px;
 }
 
 /* Submenú en Productos */
@@ -73,13 +178,28 @@
   font-size: 1.1rem;
   font-weight: 500;
   padding: 6px 12px;
-  border-radius: 20px;
-  transition: background 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.navbar-link::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 4px;
+  width: 0;
+  height: 2px;
+  background: #88ff43;
+  transition: width 0.3s ease, left 0.3s ease;
 }
 
 .navbar-link:hover {
-  background: rgba(255,255,255,0.1);
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  color: #88ff43;
+}
+
+.navbar-link:hover::after {
+  width: calc(100% - 12px);
+  left: 6px;
 }
 
 .submenu {
@@ -174,47 +294,67 @@
 }
 
 .profile-button {
-  font-size: 2rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.95rem;
+  padding: 0.45rem 0.8rem;
+  background: rgba(255,255,255,0.12);
+  border-radius: 18px;
   color: #fff;
+  text-decoration: none;
   cursor: pointer;
-  transition: transform 0.3s ease, color 0.3s ease;
+  transition: transform 0.2s ease, color 0.3s ease, background 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 .profile-button:hover {
-  transform: scale(1.2);
+  transform: scale(1.03);
   color: #88ff43;
+  background: rgba(255,255,255,0.18);
+}
+
+.profile-icon {
+  width: 18px;
+  height: 18px;
 }
 
 .profile-menu {
   display: none;
   position: absolute;
-  top: 40px;
+  top: 45px;
   right: 0;
   background: #fff;
   border: 1px solid #ccc;
-  border-radius: 8px;
-  min-width: 160px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  border-radius: 12px;
+  min-width: 210px;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.18);
   z-index: 1000;
+  padding: 0.5rem 0;
 }
 
-.profile-menu a {
+.profile-menu.open {
   display: block;
-  padding: 10px 15px;
-  text-decoration: none;
+}
+
+.profile-menu a,
+.profile-menu button {
+  display: block;
+  width: 100%;
+  padding: 10px 16px;
+  text-align: left;
+  background: transparent;
+  border: none;
   font-family: 'Inter', sans-serif;
   color: #333;
-  transition: background 0.3s ease, box-shadow 0.3s ease;
-  border-radius: 12px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.25s ease;
 }
 
-.profile-menu a:hover {
+.profile-menu a:hover,
+.profile-menu button:hover {
   background: #f1f1f1;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-}
-
-.navbar-profile:hover .profile-menu {
-  display: block;
 }
 
 /* Carrito */
@@ -321,5 +461,79 @@
 
   .submenu li a:hover {
     background: rgba(255,255,255,0.2);
+  }
+}
+/* Estilo base (desktop) */
+.navbar {
+  position: static;
+  top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #0d6efd;
+  padding: 0.8rem 1.5rem;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* ✅ Responsive para tablets y móviles */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .navbar-links {
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .navbar-actions {
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    margin-top: 15px;
+  }
+
+  .navbar-search input {
+    width: 100%;
+  }
+
+  .cart-badge {
+    position: static; /* badge se acomoda debajo en móvil */
+    margin-left: 5px;
+  }
+}
+
+/* ✅ Responsive extra para pantallas muy chicas */
+@media (max-width: 480px) {
+  .navbar-logo {
+    width: 120px;
+  }
+
+  .navbar-links a {
+    font-size: 0.9rem;
+  }
+
+  .navbar-search input {
+    font-size: 0.9rem;
+    padding: 6px;
+  }
+
+  .navbar-actions button,
+  .navbar-controles button {
+    font-size: 0.8rem;
+    padding: 5px 8px;
   }
 }

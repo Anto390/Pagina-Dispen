@@ -1,67 +1,129 @@
 .carrusel {
   position: relative;
-  width: 150%;          /* ✅ ocupa el ancho del contenedor */
-  max-width: 1200px;    /* ✅ límite de ancho para que no se estire demasiado */
-  height: 800px;        /* ✅ altura fija más estética */
-  margin: 0 auto;       /* ✅ centra el carrusel */
+  width: min(100%, 1080px);
+  height: 520px;
+  margin: 0 auto;
   overflow: hidden;
-  border-radius: 12px;  /* ✅ bordes redondeados */
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2); /* ✅ sombra elegante */
+  border-radius: 28px;
+  box-shadow: 0 28px 70px rgba(15, 23, 42, 0.22);
+  background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.12), transparent 32%),
+    linear-gradient(180deg, rgba(15, 76, 129, 0.12), rgba(13, 58, 100, 0.10));
+}
+
+.carrusel-slide {
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
 
 .carrusel-slide img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* ✅ recorta la imagen sin deformarla */
+  object-fit: cover;
   display: block;
-  border-radius: 12px;
+  border-radius: 28px;
+  transition: transform 0.8s ease;
 }
 
-/* Botones flechas */
+.carrusel:hover .carrusel-slide img {
+  transform: scale(1.03);
+}
+
+.carrusel-slide::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.28));
+  pointer-events: none;
+  border-radius: 28px;
+}
+
 .carrusel-btn {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.4);
-  border: none;
-  padding: 0.8rem;
+  width: 50px;
+  height: 50px;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  color: #ffffff;
   cursor: pointer;
   z-index: 10;
   border-radius: 50%;
-  transition: background 0.3s ease;
+  transition: transform 0.25s ease, background 0.25s ease;
 }
 
 .carrusel-btn:hover {
-  background: rgba(0, 0, 0, 0.7);
+  transform: translateY(-50%) scale(1.05);
+  background: rgba(255, 255, 255, 0.28);
 }
 
 .carrusel-btn.left {
-  left: 20px;
+  left: 18px;
 }
 
 .carrusel-btn.right {
-  right: 20px;
+  right: 18px;
 }
 
-/* Indicadores */
+.carrusel-btn svg {
+  width: 22px;
+  height: 22px;
+}
+
 .carrusel-indicators {
   position: absolute;
-  bottom: 15px;
+  bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  gap: 8px;
+  gap: 10px;
+  padding: 0.45rem 0.75rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 999px;
+  backdrop-filter: blur(10px);
 }
 
 .dot {
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.6);
-  cursor: pointer;
-  transition: background 0.3s ease;
+  background: rgba(255, 255, 255, 0.55);
+  transition: transform 0.25s ease, background 0.25s ease;
 }
 
 .dot.active {
-  background: white;
+  width: 16px;
+  height: 16px;
+  background: rgba(255, 255, 255, 0.95);
+}
+
+@media (max-width: 900px) {
+  .carrusel {
+    height: 420px;
+    border-radius: 22px;
+  }
+}
+
+@media (max-width: 600px) {
+  .carrusel {
+    width: 100%;
+    height: 320px;
+  }
+
+  .carrusel-btn {
+    width: 44px;
+    height: 44px;
+  }
+
+  .carrusel-btn.left {
+    left: 12px;
+  }
+
+  .carrusel-btn.right {
+    right: 12px;
+  }
 }

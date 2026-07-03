@@ -15,6 +15,28 @@
   gap: 20px;
 }
 
+/* Global responsive tweaks */
+@media (max-width: 900px) {
+  body {
+    font-size: 15px;
+  }
+
+  .productos {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 14px;
+  }
+
+  .productos {
+    grid-template-columns: 1fr;
+  }
+}
+
 .producto-card {
   background: white;
   padding: 15px;

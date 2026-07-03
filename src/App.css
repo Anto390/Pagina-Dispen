@@ -10,3 +10,18 @@ main {
   background-color: #f9f9f9;
   color: #333;
 }
+
+.notification-toast {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 1000;
+  background-color: #023e8a;
+  color: #fff;
+  padding: 0.9rem 1.2rem;
+  border-radius: 1rem;
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.18);
+  font-weight: 600;
+  min-width: 220px;
+  text-align: center;
+}

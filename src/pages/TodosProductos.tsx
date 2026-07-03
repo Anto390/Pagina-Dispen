@@ -4,8 +4,9 @@ import { useCarritoContext } from "../context/CartContext";
 import { useProducts } from "../context/ProductContext";
 import ProductModal from "../components/ProductModal";
 import { Product } from "../data/products";
+import "./TodosProductos.css";
 
-const Productos: React.FC = () => {
+export default function TodosProductos() {
   const { addToCart } = useCarritoContext();
   const { products } = useProducts();
   const navigate = useNavigate();
@@ -27,32 +28,23 @@ const Productos: React.FC = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-6">Catálogo de Artículos de Limpieza</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {products.map((producto: Product) => (
-          <div
-            key={producto.id}
-            className="rounded-lg shadow-md p-4 flex flex-col items-center bg-white hover:shadow-lg transition cursor-pointer"
-            onClick={() => openProduct(producto)}
-          >
-            <img
-              src={producto.img}
-              alt={producto.nombre}
-              className="w-40 h-40 object-cover mb-4 rounded-md"
-            />
-            <h2 className="text-lg font-semibold">{producto.nombre}</h2>
-            <p className="text-sm text-gray-600">Marca: {producto.marca}</p>
-            <p className="text-sm text-gray-600">Stock: {producto.stock}</p>
-            <p className="text-xl font-bold text-blue-600">${producto.precio}</p>
+    <div className="todos-page">
+      <h2>🧼 Catálogo Completo de Productos</h2>
+      <div className="productos-grid">
+        {products.map((p: Product) => (
+          <div key={p.id} className="producto-card" onClick={() => openProduct(p)}>
+            <img src={p.img} alt={p.nombre} />
+            <h3>{p.nombre}</h3>
+            <p className="marca">Marca: {p.marca}</p>
+            <p className="precio">${p.precio}</p>
+            <p className="stock">Stock: {p.stock}</p>
             <button
-              className="mt-3 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
               onClick={(e) => {
                 e.stopPropagation();
-                addToCart(producto, 1);
+                addToCart(p, 1);
               }}
             >
-              Agregar al carrito
+              Agregar al Carrito 🛒
             </button>
           </div>
         ))}
@@ -68,6 +60,4 @@ const Productos: React.FC = () => {
       )}
     </div>
   );
-};
-
-export default Productos;
+}

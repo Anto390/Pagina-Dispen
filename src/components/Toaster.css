@@ -1,0 +1,35 @@
+.custom-toast {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 320px;
+  padding: 1rem 1.1rem;
+  border-radius: 1rem;
+  background: rgba(15, 23, 42, 0.96);
+  color: white;
+  box-shadow: 0 25px 60px rgba(15, 23, 42, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  z-index: 9999;
+}
+
+.custom-toast::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #0077b6 0%, #28a745 100%);
+  opacity: 0.22;
+  filter: blur(16px);
+  transform: scale(1.18);
+  pointer-events: none;
+}
+
+.custom-toast:hover {
+  transform: translateY(-1px);
+}
+
+.custom-toast__icon,
+.custom-toast svg {
+  margin-right: 0.75rem;
+}

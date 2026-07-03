@@ -1,0 +1,83 @@
+.logos3 {
+  padding: 2rem 0;
+}
+
+.logos3-heading {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.logos3-heading h2 {
+  font-size: 1.95rem;
+  color: #0f4c81;
+}
+
+.logos3-slider {
+  position: relative;
+  overflow: hidden;
+  padding: 0.5rem 0;
+}
+
+.logos3-track {
+  display: flex;
+  gap: 1rem;
+  animation: slide-left 20s linear infinite;
+}
+
+.logos3-card {
+  flex: 0 0 auto;
+  width: 180px;
+  background: #ffffff;
+  border: 1px solid #dbe4f0;
+  border-radius: 18px;
+  padding: 1.35rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  min-height: 140px;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.06);
+}
+
+@keyframes slide-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.logos3-card img {
+  display: block;
+  max-width: 100%;
+}
+
+.logos3-card span {
+  color: #334155;
+  font-weight: 700;
+  text-align: center;
+}
+
+.logos3-card img {
+  display: block;
+  max-width: 100%;
+}
+
+.logos3-card span {
+  color: #334155;
+  font-weight: 700;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .logos3-track {
+    gap: 0.75rem;
+  }
+
+  .logos3-card {
+    width: 150px;
+    min-height: 120px;
+  }
+}

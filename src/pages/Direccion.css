@@ -1,0 +1,17 @@
+.address-input {
+  border: 2px solid #000;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+/* Ensure the save buttons and card keep spacing */
+.card .card-body {
+  display: block;
+}
+
+/* Small responsive adjustments */
+@media (max-width: 600px) {
+  .address-input {
+    padding: 0.6rem;
+  }
+}

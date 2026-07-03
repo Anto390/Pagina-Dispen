@@ -1,0 +1,48 @@
+.animated-tabs {
+  display: inline-flex;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+  padding: 0.35rem;
+  backdrop-filter: blur(12px);
+}
+
+.animated-tab {
+  position: relative;
+  padding: 0.85rem 1.25rem;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 700;
+  border-radius: 999px;
+  transition: color 0.25s ease, background-color 0.25s ease;
+}
+
+.animated-tab::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  opacity: 0;
+  transition: opacity 0.25s ease, transform 0.25s ease, background-color 0.25s ease;
+  transform: scale(0.92);
+}
+
+.animated-tab:hover::before,
+.animated-tab.active::before {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.animated-tab.active {
+  color: #0f4c81;
+}
+
+.animated-tab.active::before {
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.animated-tab:hover {
+  color: #ffffff;
+}
