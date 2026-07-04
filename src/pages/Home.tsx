@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCarritoContext } from "../context/CartContext";
 import Carrusel from "../components/Carrusel";
@@ -15,43 +15,56 @@ import img4 from "../assets/Imagen carrusel 4.png";
 
 const featuredIds = [1, 2, 3];
 
+const createLogoImage = (label: string, bg: string, color: string) => {
+  const svg = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="200" height="60" viewBox="0 0 200 60">
+      <rect width="200" height="60" rx="14" fill="${bg}" />
+      <circle cx="38" cy="30" r="16" fill="${color}" opacity="0.18" />
+      <text x="72" y="36" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="${color}">
+        ${label}
+      </text>
+    </svg>
+  `;
+  return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+};
+
 const logoData = {
   heading: "Marcas que trabajamos",
   logos: [
     {
       id: "logo-1",
-      description: "Saphitus",
-      image: "https://via.placeholder.com/200x60?text=Saphitus",
+      description: "Saphirus",
+      image: createLogoImage("Saphirus", "#eff6ff", "#1d4ed8"),
       className: "h-7 w-auto",
     },
     {
       id: "logo-2",
       description: "Ayudin",
-      image: "https://via.placeholder.com/200x60?text=Ayudin",
+      image: createLogoImage("Ayudin", "#fdf2f8", "#be185d"),
       className: "h-7 w-auto",
     },
     {
       id: "logo-3",
       description: "Cife",
-      image: "https://via.placeholder.com/200x60?text=Cife",
+      image: createLogoImage("Cife", "#ecfeff", "#0f766e"),
       className: "h-7 w-auto",
     },
     {
       id: "logo-4",
       description: "Thames",
-      image: "https://via.placeholder.com/200x60?text=Thames",
+      image: createLogoImage("Thames", "#f5f3ff", "#7c3aed"),
       className: "h-7 w-auto",
     },
     {
       id: "logo-5",
       description: "Ayudin Plus",
-      image: "https://via.placeholder.com/200x60?text=Ayudin+Plus",
+      image: createLogoImage("Ayudin Plus", "#fff7ed", "#c2410c"),
       className: "h-7 w-auto",
     },
     {
       id: "logo-6",
       description: "EcoHogar",
-      image: "https://via.placeholder.com/200x60?text=EcoHogar",
+      image: createLogoImage("EcoHogar", "#f0fdf4", "#15803d"),
       className: "h-7 w-auto",
     },
   ],
@@ -61,6 +74,13 @@ export default function Home() {
   const { addToCart } = useCarritoContext();
   const navigate = useNavigate();
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [theme, setTheme] = useState<"light" | "dark">(() => {
+    const storedTheme = localStorage.getItem("dispenhogar-theme");
+    if (storedTheme === "dark" || storedTheme === "light") {
+      return storedTheme;
+    }
+    return "light";
+  });
 
   const { products } = useProducts();
 
@@ -83,8 +103,22 @@ export default function Home() {
     closeProduct();
   };
 
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("dispenhogar-theme", theme);
+  }, [theme]);
+
   return (
-    <div className="home-page">
+    <div className={`home-page ${theme === "dark" ? "theme-dark" : "theme-light"}`}>
+      <div className="theme-toggle-wrapper">
+        <button
+          type="button"
+          className="theme-toggle"
+          onClick={() => setTheme((prev) => (prev === "light" ? "dark" : "light"))}
+        >
+          {theme === "light" ? "🌙 Oscuro" : "☀️ Claro"}
+        </button>
+      </div>
       <Carrusel images={[img1, img2, img3, img4]} />
 
       <Logos3 {...logoData} />

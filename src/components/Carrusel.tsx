@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import hero from "../assets/hero.png";
 import "./Carrusel.css";
 
 interface CarruselProps {
@@ -7,31 +8,51 @@ interface CarruselProps {
 
 export default function Carrusel({ images }: CarruselProps) {
   const [current, setCurrent] = useState(0);
+  const [imageSources, setImageSources] = useState<string[]>(images);
+
+  useEffect(() => {
+    setImageSources(images);
+    setCurrent(0);
+  }, [images]);
 
   const nextSlide = () => {
-    setCurrent((prev) => (prev + 1) % images.length);
+    setCurrent((prev) => (prev + 1) % imageSources.length);
   };
 
   const prevSlide = () => {
-    setCurrent((prev) => (prev - 1 + images.length) % images.length);
+    setCurrent((prev) => (prev - 1 + imageSources.length) % imageSources.length);
   };
 
   const goToSlide = (index: number) => {
     setCurrent(index);
   };
 
+  const handleImageError = (event: React.SyntheticEvent<HTMLImageElement>) => {
+    const target = event.currentTarget;
+    if (target.dataset.fallbackApplied === "true") {
+      return;
+    }
+    target.dataset.fallbackApplied = "true";
+    target.src = hero;
+  };
+
   // ✅ Avance automático cada 5 segundos
   useEffect(() => {
+    if (!imageSources.length) return;
     const interval = setInterval(() => {
       nextSlide();
     }, 5000);
     return () => clearInterval(interval);
-  }, []);
+  }, [imageSources.length]);
 
   return (
     <div className="carrusel">
       <div className="carrusel-slide">
-        <img src={images[current]} alt={`Slide ${current}`} />
+        <img
+          src={imageSources[current] || hero}
+          alt={`Slide ${current}`}
+          onError={handleImageError}
+        />
       </div>
 
       {/* Flecha izquierda */}
@@ -50,7 +71,7 @@ export default function Carrusel({ images }: CarruselProps) {
 
       {/* Indicadores */}
       <div className="carrusel-indicators">
-        {images.map((_, index) => (
+        {imageSources.map((_, index) => (
           <span
             key={index}
             className={`dot ${index === current ? "active" : ""}`}

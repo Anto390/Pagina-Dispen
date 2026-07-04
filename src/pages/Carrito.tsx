@@ -62,8 +62,8 @@ export default function Carrito() {
                   <p>Precio: ${item.precio}</p>
                   <p>Cantidad: {item.cantidad}</p>
                   <div className="carrito-controles">
-                    <button onClick={() => aumentarCantidad(item.id)}>➕</button>
-                    <button onClick={() => disminuirCantidad(item.id)}>➖</button>
+                    <button onClick={() => aumentarCantidad(item.id)}>+</button>
+                    <button onClick={() => disminuirCantidad(item.id)}>-</button>
                     <button onClick={() => removeItem(item.id)}>❌ Eliminar</button>
                   </div>
                 </div>
